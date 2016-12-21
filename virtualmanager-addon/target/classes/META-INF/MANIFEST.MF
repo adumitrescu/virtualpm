@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Implementation-Title: virtualmanager-addon
+Implementation-Version: 1.0.0-SNAPSHOT
+Vaadin-Widgetsets: com.vm.VirtualManagerWidgetset
+Vaadin-Package-Version: 1
+Built-By: crpaslaru
+Implementation-Vendor-Id: com.vm
+Class-Path: vaadin-shared-7.7.5.jar guava-18.0.jar maddon-1.15.jar con
+ firmdialog-2.1.1.jar markdown4j-2.2-cj-1.0.jar commons-io-2.4.jar com
+ mons-beanutils-1.9.1.jar commons-logging-1.1.1.jar commons-collection
+ s-3.2.1.jar commons-lang3-3.3.2.jar slf4j-jdk14-1.6.4.jar slf4j-api-1
+ .6.4.jar vaadin-sass-compiler-0.9.13.jar sac-1.3.jar flute-1.3.0.gg2.
+ jar yuicompressor-2.4.8.jar js-1.7R2.jar vaadin-server-7.7.5.jar jsou
+ p-1.8.3.jar vaadin-push-7.7.5.jar atmosphere-runtime-2.2.9.vaadin2.ja
+ r vaadin-slf4j-jdk14-1.6.1.jar vaadin-themes-7.7.5.jar vaadin-client-
+ compiled-7.7.5.jar vaadin-charts-3.2.0.jar vaadin-charts-model-3.2.0.
+ jar jackson-annotations-2.5.0.jar jackson-databind-2.5.2.jar jackson-
+ core-2.5.1.jar
+Build-Jdk: 1.8.0_71
+Created-By: Maven Integration for Eclipse
+

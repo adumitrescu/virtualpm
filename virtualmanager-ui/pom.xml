@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>virtualmanager</artifactId>
+		<groupId>com.vm</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>virtualmanager-ui</artifactId>
+	<name>virtualmanager-ui</name>
+	<packaging>war</packaging>
+
+	<dependencies>
+		<!-- Versions for these are configured in the parent POM -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.peimari</groupId>
+			<artifactId>maddon</artifactId>
+			<version>1.15</version>
+		</dependency>
+			<dependency>
+			<groupId>org.codehaus.sonar</groupId>
+			<artifactId>sonar-ws-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client-compiler</artifactId>
+		</dependency>
+		<!-- mongodb java driver -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-push</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-themes</artifactId>
+		</dependency>
+		<!-- vaadin-client-compiled is needed if the pom contains no add-ons -->
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client-compiled</artifactId>
+		</dependency>
+
+		<!-- Add-on from this project, uncomment to enable client-side modifications -->
+		<!-- Note that Widgetset CDN can't be used with this. -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>virtualmanager-addon</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- Backend implementation -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>virtualmanager-backend</artifactId>
+			<version>${project.version}</version>
+			<!-- <classifier>classes</classifier> -->
+		</dependency>
+
+		<!-- Testing -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<!-- The Jetty plugin allows us to easily test the development build by 
+				running jetty:run on the command line. -->
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.plugin.version}</version>
+				<configuration>
+					<scanIntervalSeconds>2</scanIntervalSeconds>
+				</configuration>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-war-plugin</artifactId> 
+				<version>2.6</version> <configuration> <warSourceDirectory>src/main/webapp</warSourceDirectory> 
+				<warName>root</warName> <failOnMissingWebXml>false</failOnMissingWebXml> 
+				<packagingExcludes>src/test/*</packagingExcludes> </configuration> </plugin> 
+				<plugin> <groupId>org.apache.tomcat.maven</groupId> <artifactId>tomcat7-maven-plugin</artifactId> 
+				<version>2.2</version> </plugin> -->
+			<plugin>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<!-- Widgetset goals for add-ons, including virtualmanager-addon -->
+							<goal>update-widgetset</goal>
+							<goal>compile</goal>
+
+							<goal>update-theme</goal>
+							<!-- Comment out compile-theme goal to use on-the-fly theme compilation -->
+							<goal>compile-theme</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
